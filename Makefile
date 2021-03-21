@@ -1,4 +1,4 @@
-CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
+CFLAGS=-g -O2 -Wall -Wextra -Isrc -DNDEBUG
 
 SOURCES=$(wildcard src/**/*.c src/*.c)
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
@@ -11,11 +11,11 @@ TARGET=2048-cli
 # The target build
 all: $(TARGET) tests
 
-dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
+dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra
 dev: all
 
 $(TARGET): build $(OBJECTS)
-	$(CC) -shared -o $@ $(OBJECTS)
+	$(CC) -o $@ $(OBJECTS)
 
 build:
 	@mkdir -p build
@@ -33,11 +33,6 @@ clean:
 	rm -f tests/tests.log
 	find . -name "*.gc*" -exec rm {} \;
 	rm -rf `find . -name "*.dSYM" -print`
-
-# The Install
-install: all
-	install -d $(DESTDIR)/${PREFIX}/lib/
-	install $(TARGET) $(DESTDIR)/$(PREFIX)/lib/
 
 # The checker
 check:
