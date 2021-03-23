@@ -23,8 +23,8 @@ build:
 
 # The Unit Tests
 .PHONY: tests
-tests: CFLAGS += $(TARGET)
-tests: $(TESTS)
+tests: $(TESTS) $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(patsubst %.c,%,$(@)) $@ $(OBJECTS)
 	sh ./tests/runtests.sh
 
 # The cleaner
