@@ -27,3 +27,10 @@ error:
     return -1;
 }
 
+int Cell_get_val(Cell *c) {
+    check(c != NULL, "Got NULL pointer!");
+    return c->val;
+error:
+    /* This is okay -- squares in 2048 always have non-negative values */
+    return -1;
+}
