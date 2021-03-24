@@ -1,7 +1,9 @@
 #ifndef CELL_H
 #define CELL_H
 
-typedef struct cell Cell;
+typedef struct cell {
+    int val;
+} Cell;
 
 Cell *Cell_create();
 void  Cell_destroy(Cell *c);
