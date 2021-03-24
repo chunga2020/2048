@@ -10,10 +10,22 @@ char *test_Cell_create_and_destroy() {
     return NULL;
 }
 
+char *test_Cell_init() {
+    Cell *c = Cell_create();
+    mu_assert(c != NULL, "Failed to create Cell!");
+    int value = 5;
+    int rv = Cell_init(c, value);
+    mu_assert(rv == 0 && c->val == value, "Cell_init() failed!");
+    Cell_destroy(c);
+    c = NULL;
+    return NULL;
+}
+
 char *all_tests() {
     mu_suite_start();
 
     mu_run_test(test_Cell_create_and_destroy);
+    mu_run_test(test_Cell_init);
 
     return NULL;
 }
