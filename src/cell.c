@@ -17,3 +17,13 @@ void Cell_destroy(Cell *c) {
         free(c);
     }
 }
+
+int Cell_init(Cell *c, int value) {
+    check(c != NULL, "Got NULL pointer!");
+
+    c->val = value;
+    return 0;
+error:
+    return -1;
+}
+
