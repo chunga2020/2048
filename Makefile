@@ -6,7 +6,9 @@ OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 TEST_SRC=$(wildcard tests/*_tests.c)
 TESTS=$(patsubst %.c,%,$(TEST_SRC))
 
-TARGET=2048-cli
+TARGET=./build/2048-cli
+
+.PHONY: all tests clean check
 
 # The target build
 all: $(TARGET) tests
@@ -22,9 +24,10 @@ build:
 	@mkdir -p bin
 
 # The Unit Tests
-.PHONY: tests
-tests: $(TESTS) $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(patsubst %.c,%,$(@)) $@ $(OBJECTS)
+$(TESTS): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $@ $(patsubst %,%.c,$(@)) $(OBJECTS)
+
+tests: $(TESTS)
 	sh ./tests/runtests.sh
 
 # The cleaner
