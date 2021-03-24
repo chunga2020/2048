@@ -34,3 +34,11 @@ error:
     /* This is okay -- squares in 2048 always have non-negative values */
     return -1;
 }
+
+int Cell_set_val(Cell *c, int new_val) {
+    check (c != NULL, "Got NULL pointer!");
+    c->val = new_val;
+    return 0;
+error:
+    return -1;
+}
